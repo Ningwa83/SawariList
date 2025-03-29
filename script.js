@@ -1,5 +1,40 @@
 
+let userData = JSON.parse(localStorage.getItem('userData')) || null;
 let carData = JSON.parse(localStorage.getItem('carData')) || [];
+
+// Function to create an account
+document.getElementById('saveButton').addEventListener('click', function () {
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value.trim().toLowerCase();
+    const password = document.getElementById('password').value;
+
+    const usernamePattern = /^[a-zA-Z0-9]{4}$/;
+    const passwordPattern = /^[a-zA-Z0-9]{4}$/;
+
+    if (usernamePattern.test(username) && passwordPattern.test(password)) {
+        userData = { email, username, password };
+        localStorage.setItem('userData', JSON.stringify(userData));
+        alert('Account created successfully! Please log in.');
+        document.getElementById('accountSection').style.display = 'none';
+        document.getElementById('loginSection').style.display = 'block';
+    } else {
+        alert('Username and Password must be exactly 4 characters (letters or numbers).');
+    }
+});
+
+// Function to log into the account
+document.getElementById('loginButton').addEventListener('click', function () {
+    const loginUsername = document.getElementById('loginUsername').value.trim().toLowerCase();
+    const loginPassword = document.getElementById('loginPassword').value;
+
+    if (userData && userData.username === loginUsername && userData.password === loginPassword) {
+        alert('Login successful!');
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('carInputSection').style.display = 'block';
+    } else {
+        alert('Invalid username or password. Please try again.');
+    }
+});
 
 // Function to add or update car details
 document.getElementById('addButton').addEventListener('click', function () {
@@ -9,10 +44,10 @@ document.getElementById('addButton').addEventListener('click', function () {
     const flat = document.getElementById('flat').value.trim().toLowerCase();
 
     if (carPlate && tower && floor && flat) {
-        const existingEntryIndex = carData.findIndex(entry =>
-            entry.carPlate === carPlate &&
-            entry.tower === tower &&
-            entry.floor === floor &&
+        const existingEntryIndex = carData.findIndex(entry => 
+            entry.carPlate === carPlate && 
+            entry.tower === tower && 
+            entry.floor === floor && 
             entry.flat === flat
         );
 
@@ -49,9 +84,9 @@ document.getElementById('searchButton').addEventListener('click', function () {
     const searchFloor = document.getElementById('searchFloor').value;
     const searchFlat = document.getElementById('searchFlat').value.trim().toLowerCase();
 
-    const results = carData.filter(entry =>
-        entry.tower === searchTower &&
-        entry.floor === searchFloor &&
+    const results = carData.filter(entry => 
+        entry.tower === searchTower && 
+        entry.floor === searchFloor && 
         entry.flat === searchFlat
     );
     displayResults(results);
@@ -91,10 +126,12 @@ function clearAllInputs() {
     document.getElementById('searchFlat').value = '';
 }
 
-// Load data from localStorage upon loading the page
+// Check if user is already registered and prompt for login
 window.onload = function () {
-    const savedData = JSON.parse(localStorage.getItem('carData'));
-    if (savedData) {
-        carData = savedData;
+    if (userData) {
+        document.getElementById('accountSection').style.display = 'none';
+        document.getElementById('loginSection').style.display = 'block';
+    } else {
+        document.getElementById('carInputSection').style.display = 'none';
     }
 };
