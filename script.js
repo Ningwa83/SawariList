@@ -1,17 +1,18 @@
 
 let carData = JSON.parse(localStorage.getItem('carData')) || [];
 
-document.getElementById('addButton').addEventListener('click', function() {
+// Function to add or update car details
+document.getElementById('addButton').addEventListener('click', function () {
     const carPlate = document.getElementById('carPlate').value.trim().toLowerCase();
     const tower = document.getElementById('tower').value;
     const floor = document.getElementById('floor').value;
     const flat = document.getElementById('flat').value.trim().toLowerCase();
 
     if (carPlate && tower && floor && flat) {
-        const existingEntryIndex = carData.findIndex(entry => 
-            entry.carPlate === carPlate && 
-            entry.tower === tower && 
-            entry.floor === floor && 
+        const existingEntryIndex = carData.findIndex(entry =>
+            entry.carPlate === carPlate &&
+            entry.tower === tower &&
+            entry.floor === floor &&
             entry.flat === flat
         );
 
@@ -35,30 +36,34 @@ document.getElementById('addButton').addEventListener('click', function() {
     }
 });
 
-document.getElementById('searchButtonCarPlate').addEventListener('click', function() {
+// Function to search by car plate
+document.getElementById('searchButtonCarPlate').addEventListener('click', function () {
     const searchPlate = document.getElementById('searchCarPlate').value.trim().toLowerCase();
     const results = carData.filter(entry => entry.carPlate === searchPlate);
     displayResults(results);
 });
 
-document.getElementById('searchButton').addEventListener('click', function() {
+// Function to search by tower, floor, and flat
+document.getElementById('searchButton').addEventListener('click', function () {
     const searchTower = document.getElementById('searchTower').value;
     const searchFloor = document.getElementById('searchFloor').value;
     const searchFlat = document.getElementById('searchFlat').value.trim().toLowerCase();
 
-    const results = carData.filter(entry => 
-        entry.tower === searchTower && 
-        entry.floor === searchFloor && 
+    const results = carData.filter(entry =>
+        entry.tower === searchTower &&
+        entry.floor === searchFloor &&
         entry.flat === searchFlat
     );
     displayResults(results);
 });
 
-document.getElementById('clearButton').addEventListener('click', function() {
+// Function to clear all input fields and results
+document.getElementById('clearButton').addEventListener('click', function () {
     clearAllInputs();
     document.getElementById('results').innerHTML = '';
 });
 
+// Function to display results
 function displayResults(results) {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
@@ -74,6 +79,7 @@ function displayResults(results) {
     }
 }
 
+// Function to clear all input fields
 function clearAllInputs() {
     document.getElementById('carPlate').value = '';
     document.getElementById('tower').value = '';
@@ -86,10 +92,9 @@ function clearAllInputs() {
 }
 
 // Load data from localStorage upon loading the page
-window.onload = function() {
+window.onload = function () {
     const savedData = JSON.parse(localStorage.getItem('carData'));
     if (savedData) {
         carData = savedData;
     }
 };
-
