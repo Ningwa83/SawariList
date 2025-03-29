@@ -11,33 +11,54 @@
     <div class="container">
         <h1>Car Owner Registry</h1>
 
-        <div class="input-section">
-            <input type="text" id="carPlate" placeholder="Car Plate (Letters/Numbers)" required>
-            <input type="number" id="tower" placeholder="Tower (1-3)" min="1" max="3" required>
-            <input type="number" id="floor" placeholder="Floor (1-68)" min="1" max="68" required>
-            <input type="text" id="flat" placeholder="Flat (a, b, c, d)" required>
-            <button id="addButton">Add</button>
+        <div id="accountSection">
+            <h2>Create Account</h2>
+            <input type="text" id="email" placeholder="Email" required>
+            <input type="text" id="username" placeholder="Username (4 chars)" required>
+            <input type="password" id="password" placeholder="Password (4 chars)" required>
+            <button id="saveButton">Save</button>
         </div>
 
-        <h2>Search</h2>
-        <div class="search-section">
-            <input type="text" id="searchCarPlate" placeholder="Search by Car Plate">
-            <button id="searchButtonCarPlate">Search</button>
+        <div id="loginSection" style="display: none;">
+            <h2>Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <button id="loginButton">Login</button>
         </div>
-        <div class="search-section">
-            <input type="number" id="searchTower" placeholder="Tower (1-3)" min="1" max="3">
-            <input type="number" id="searchFloor" placeholder="Floor (1-68)" min="1" max="68">
-            <input type="text" id="searchFlat" placeholder="Flat (a, b, c, d)">
-            <button id="searchButton">Search</button>
-        </div>
-        <button id="clearButton">Clear All</button>
 
-        <h2>Results</h2>
-        <div id="results"></div>
+        <div id="carInputSection" style="display: none;">
+            <div class="input-section">
+                <input type="text" id="carPlate" placeholder="Car Plate (Letters/Numbers)" required>
+                <input type="number" id="tower" placeholder="Tower (1-3)" min="1" max="3" required>
+                <input type="number" id="floor" placeholder="Floor (1-68)" min="1" max="68" required>
+                <input type="text" id="flat" placeholder="Flat (a, b, c, d)" required>
+                <button id="addButton">Add</button>
+            </div>
+
+            <h2>Search</h2>
+            <div class="search-section">
+                <input type="text" id="searchCarPlate" placeholder="Search by Car Plate">
+                <button id="searchButtonCarPlate">Search</button>
+            </div>
+            <div class="search-section">
+                <input type="number" id="searchTower" placeholder="Tower (1-3)" min="1" max="3">
+                <input type="number" id="searchFloor" placeholder="Floor (1-68)" min="1" max="68">
+                <input type="text" id="searchFlat" placeholder="Flat (a, b, c, d)">
+                <button id="searchButton">Search</button>
+            </div>
+            <button id="clearButton">Clear All</button>
+
+            <h2>Results</h2>
+            <div id="results"></div>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
 
 
 
